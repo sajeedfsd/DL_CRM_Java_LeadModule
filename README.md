@@ -19,3 +19,8 @@ DL_CRM_Java_LeadModule
 
 ## Count Records
 ### http://localhost:8080/api/users/count
+
+## URLS FrontEnd
+
+### http://localhost:3000/create-lead
+### http://localhost:3000/lead-management
