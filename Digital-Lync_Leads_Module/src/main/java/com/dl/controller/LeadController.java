@@ -19,7 +19,7 @@ import com.dl.service.LeadService;
 // http://localhost:8080/api/students
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/leads")
+@RequestMapping("/api")
 public class LeadController {
 
 	private final LeadService leadService;
@@ -28,22 +28,27 @@ public class LeadController {
         this.leadService = leadService;
     }
     
-    //http://localhost:8080/leads/getAllLeads
+    //http://localhost:8080/api/getAllLeads
     @GetMapping("/getAllLeads")
     public List<CreateNewLead> getAllLeads() {
         return leadService.getAllLeads();
     }
 
-    //http://localhost:8080/leads/createLead
+    //http://localhost:8080/api/createLead
     @PostMapping("/createLead")
     public CreateNewLead createLead(@RequestBody CreateNewLead lead) {
         return leadService.createLead(lead);
     }
     
-    //http://localhost:8080/leads/createLead
+    //http://localhost:8080/api/createLead
     @PutMapping("/updateLead")
     public CreateNewLead updateLead(@RequestBody CreateNewLead lead) {
         return leadService.leadupdateLead(lead);
+    }
+    
+    @PutMapping("/updateLead/{id}")
+    public CreateNewLead updateLead(@PathVariable(value = "id") Integer leadId, @RequestBody CreateNewLead lead) {
+        return leadService.updateLead(leadId, lead);
     }
 
 //    @DeleteMapping("/{id}")
@@ -51,14 +56,14 @@ public class LeadController {
 //        leadService.deleteLead(id);
 //    }
     
-    //http://localhost:8080/leads/253
+    // http://localhost:8080/api/1
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteLead(@PathVariable Integer id) {
         leadService.deleteLead(id);
         return ResponseEntity.ok("Lead with ID :" + id + " deleted successfully");
     }
     
-    //http://localhost:8080/leads/users/count
+    //http://localhost:8080/api/users/count
     @GetMapping("/users/count")
     public long countUsers() {
         return leadService.countUsers();

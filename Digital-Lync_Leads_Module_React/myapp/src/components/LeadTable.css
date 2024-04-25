@@ -1,0 +1,23 @@
+.lead-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.lead-table th, .lead-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.lead-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+/* In LeadTable.css */
+.create-lead-link {
+    color: blue;
+    text-decoration: none;
+    font-size: 20px;
+}

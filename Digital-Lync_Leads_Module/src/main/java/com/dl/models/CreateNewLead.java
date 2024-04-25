@@ -1,5 +1,10 @@
 package com.dl.models;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -13,11 +18,19 @@ public class CreateNewLead {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	private String name;
-	private Long cc; // country code
-	private Long contactNo;
-	private String email;
-	private Double feeCoated;
+	private String name; //Name
+	private Long cc; // CC 
+	private Long contactNo; //Phone
+	private String email; //Email
+	private Double feeCoated; //FeeQuoted 
+	private String description; //Description
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date nextFollowUp; //NextFollowUp
+	
+	public String getFormattedNextFollowUp() {
+	    SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy, h.mm a");
+	    return formatter.format(nextFollowUp);
+	}
 
 	@Enumerated(EnumType.STRING)
 	private LeadStatus leadStatus;
@@ -36,20 +49,24 @@ public class CreateNewLead {
 	
 	@Enumerated(EnumType.STRING)
 	private BatchTiming batchTiming;
-
+	
 	public CreateNewLead() {
-
+		
 	}
+	
 
 	public CreateNewLead(Integer id, String name, Long cc, Long contactNo, String email, Double feeCoated,
-			LeadStatus leadStatus, LeadSource leadSource, TechStack techStack, Courses courses, ClassMode classMode,
-			BatchTiming batchTiming) {
+			String description, Date nextFollowUp, LeadStatus leadStatus, LeadSource leadSource, TechStack techStack,
+			Courses courses, ClassMode classMode, BatchTiming batchTiming) {
+		super();
 		this.id = id;
 		this.name = name;
 		this.cc = cc;
 		this.contactNo = contactNo;
 		this.email = email;
 		this.feeCoated = feeCoated;
+		this.description = description;
+		this.nextFollowUp = nextFollowUp;
 		this.leadStatus = leadStatus;
 		this.leadSource = leadSource;
 		this.techStack = techStack;
@@ -57,6 +74,7 @@ public class CreateNewLead {
 		this.classMode = classMode;
 		this.batchTiming = batchTiming;
 	}
+
 
 	public Integer getId() {
 		return id;
@@ -104,6 +122,22 @@ public class CreateNewLead {
 
 	public void setFeeCoated(Double feeCoated) {
 		this.feeCoated = feeCoated;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Date getNextFollowUp() {
+		return nextFollowUp;
+	}
+
+	public void setNextFollowUp(Date nextFollowUp) {
+		this.nextFollowUp = nextFollowUp;
 	}
 
 	public LeadStatus getLeadStatus() {
@@ -154,13 +188,7 @@ public class CreateNewLead {
 		this.batchTiming = batchTiming;
 	}
 
-	@Override
-	public String toString() {
-		return "CreateNewLead [id=" + id + ", name=" + name + ", cc=" + cc + ", contactNo=" + contactNo + ", email="
-				+ email + ", feeCoated=" + feeCoated + ", leadStatus=" + leadStatus + ", leadSource=" + leadSource
-				+ ", techStack=" + techStack + ", courses=" + courses + ", classMode=" + classMode + ", batchTiming="
-				+ batchTiming + "]";
-	}
+	
 
 
 }

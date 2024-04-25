@@ -27,6 +27,27 @@ public class LeadService {
     public CreateNewLead leadupdateLead(CreateNewLead lead) {
         return leadRepository.save(lead);
     }
+    
+    public CreateNewLead updateLead(Integer id, CreateNewLead leadDetails) {
+        CreateNewLead lead = leadRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Lead not found for this id :: " + id));
+
+        lead.setName(leadDetails.getName());
+        lead.setCc(leadDetails.getCc());
+        lead.setContactNo(leadDetails.getContactNo());
+        lead.setEmail(leadDetails.getEmail());
+        lead.setFeeCoated(leadDetails.getFeeCoated());
+        lead.setDescription(leadDetails.getDescription());
+        lead.setNextFollowUp(leadDetails.getNextFollowUp());
+        lead.setLeadStatus(leadDetails.getLeadStatus());
+        lead.setLeadSource(leadDetails.getLeadSource());
+        lead.setTechStack(leadDetails.getTechStack());
+        lead.setCourses(leadDetails.getCourses());
+        lead.setClassMode(leadDetails.getClassMode());
+        lead.setBatchTiming(leadDetails.getBatchTiming());
+
+        return leadRepository.save(lead);
+    }
 
     public void deleteLead(Integer id) {
         leadRepository.deleteById(id);
