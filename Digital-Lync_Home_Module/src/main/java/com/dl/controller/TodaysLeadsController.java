@@ -1,0 +1,41 @@
+package com.dl.controller;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.dl.model.TodaysLeads;
+import com.dl.service.TodaysLeadsLeadService;
+
+@RestController
+@RequestMapping("/api/followups")
+public class TodaysLeadsController {
+
+	private final TodaysLeadsLeadService todaysLeadsLeadService;
+
+    public TodaysLeadsController(TodaysLeadsLeadService todaysLeadsLeadService) {
+        this.todaysLeadsLeadService = todaysLeadsLeadService;
+    }
+    
+    //http://localhost:8080/api/followups/
+    @GetMapping("/")
+    public List<TodaysLeads> getFollowUpLeads() {
+        return todaysLeadsLeadService.getFollowUpLeads();
+    }
+    
+    //http://localhost:8080/api/followups/count
+    @GetMapping("/count")
+    public long getFollowUpLeadsCount() {
+        return todaysLeadsLeadService.getFollowUpLeadsCount();
+    }
+    
+    //http://localhost:8080/api/followups/leads
+    @PostMapping("/leads")
+    public TodaysLeads createLead(@RequestBody TodaysLeads newLead) {
+        return todaysLeadsLeadService.createLead(newLead);
+    }
+}
