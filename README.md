@@ -24,3 +24,5 @@ DL_CRM_Java_LeadModule
 
 ### http://localhost:3000/create-lead
 ### http://localhost:3000/lead-management
+
+# Swagger : http://localhost:8080/swagger-ui/index.html
