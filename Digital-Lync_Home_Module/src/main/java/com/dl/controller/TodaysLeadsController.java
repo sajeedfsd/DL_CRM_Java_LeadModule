@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dl.model.TodaysLeads;
+import com.dl.model.TotalFollowUpLeads;
 import com.dl.service.TodaysLeadsLeadService;
 
 @RestController
-@RequestMapping("/api/followups")
+@RequestMapping("/api/todaysleads/followups")
 public class TodaysLeadsController {
 
 	private final TodaysLeadsLeadService todaysLeadsLeadService;
@@ -21,21 +22,27 @@ public class TodaysLeadsController {
         this.todaysLeadsLeadService = todaysLeadsLeadService;
     }
     
-    //http://localhost:8080/api/followups/
+    //http://localhost:8080/api/todaysleads/followups/
     @GetMapping("/")
     public List<TodaysLeads> getFollowUpLeads() {
         return todaysLeadsLeadService.getFollowUpLeads();
     }
     
-    //http://localhost:8080/api/followups/count
+    //http://localhost:8080/api/todaysleads/followups/count
     @GetMapping("/count")
     public long getFollowUpLeadsCount() {
         return todaysLeadsLeadService.getFollowUpLeadsCount();
     }
     
-    //http://localhost:8080/api/followups/leads
+    //http://localhost:8080/api/todaysleads/followups/leads
     @PostMapping("/leads")
     public TodaysLeads createLead(@RequestBody TodaysLeads newLead) {
         return todaysLeadsLeadService.createLead(newLead);
     }
+    
+    //http://localhost:8080/api/todaysleads/followups/getAllLeads
+  	@GetMapping("/getAllLeads")
+  	public List<TodaysLeads> getAllLeads() {
+  		return todaysLeadsLeadService.getAllLeads();
+  	}
 }

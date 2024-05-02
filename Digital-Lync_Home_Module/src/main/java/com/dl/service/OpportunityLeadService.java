@@ -3,10 +3,12 @@ package com.dl.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.dl.model.TodaysLeads;
+import com.dl.model.OpportunityLeads;
 import com.dl.repo.OpportunityLeadsRepository;
 
+@Service
 public class OpportunityLeadService {
 
 	@Autowired
@@ -21,19 +23,19 @@ public class OpportunityLeadService {
 		this.opportunityLeadsRepository = opportunityLeadsRepository;
 	}
 	
-	public List<OpportunityLeadsRepository> getAllLeads() {
+	public List<OpportunityLeads> getAllLeads() {
 		return opportunityLeadsRepository.findAll();
 	}
 
-	public List<OpportunityLeadsRepository> getFollowUpLeads() {
-		return opportunityLeadsRepository.findByTodaysLeads(true);
+	public List<OpportunityLeads> getFollowUpLeads() {
+		return opportunityLeadsRepository.findByOpportunityLeads(true);
 	}
 
 	public long getFollowUpLeadsCount() {
-		return opportunityLeadsRepository.countByTodaysLeads(true);
+		return opportunityLeadsRepository.countByOpportunityLeads(true);
 	}
 
-	public OpportunityLeadsRepository createLead(OpportunityLeadsRepository newLead) {
+	public OpportunityLeads createLead(OpportunityLeads newLead) {
 		return opportunityLeadsRepository.save(newLead);
 	}
 }
